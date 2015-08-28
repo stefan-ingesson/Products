@@ -21,6 +21,11 @@ namespace Products
             {
                 Console.WriteLine(item.ProductName);
             }
+
+            foreach (var item in list)
+            {
+                Console.WriteLine(item.ProductPrice);
+            }
         }
     }
 }

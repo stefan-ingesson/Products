@@ -28,6 +28,15 @@ namespace Products
             return subset.ToList<Product>();
         }
 
+        public List<Product> ProductsSortedByPrice()
+        {
+            var price = from product in productdb
+                        orderby product.ProductPrice
+                        select product;
+
+            return price.ToList<Product>();
+        }
+
 
         public void RemoveProductID(int productid)
         {

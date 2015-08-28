@@ -17,7 +17,7 @@ namespace Products
 
         public void ShowMenu()
         {
-            Console.WriteLine("THis is the MENU, 1,2,3");
+            Console.WriteLine("THis is the MENU, 1,2,3,4");
             ConsoleKey key = Console.ReadKey().Key;
 
             if (key == ConsoleKey.D1)
@@ -26,6 +26,8 @@ namespace Products
                 RemoveProduct();
             else if (key == ConsoleKey.D3)
                 ListProducts();
+            else if (key == ConsoleKey.D4)
+                ListProductsByPrice();
          }
 
         public void NewProduct()
@@ -36,10 +38,14 @@ namespace Products
             string name = Console.ReadLine();
             Console.Write("ProductID:");
             int id = Int32.Parse(Console.ReadLine());
+
+            Console.Write("ProductPrice:");
+            int price = Int32.Parse(Console.ReadLine());
             //...
             Product product = new Product();
             product.ProductName = name;
             product.ProductID = id;
+            product.ProductPrice = price;
             product.ProductDescription = "Generic product description.";
             //...
             storage.AddNewProduct(product);
@@ -57,6 +63,13 @@ namespace Products
             var prodlist = storage.ProductsSortedByName();
             IView view = new ConsoleView(prodlist);
             view.RenderView();
+        }
+
+        public void ListProductsByPrice()
+        {
+           var prodByPrice = storage.ProductsSortedByPrice();
+           IView view = new ConsoleView(prodByPrice);
+           view.RenderView();
         }
     }
 }

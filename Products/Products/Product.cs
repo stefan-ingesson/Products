@@ -21,6 +21,7 @@
         public string ProductDescription { get; set; }
         public float Weight { get; set; }
         public bool InStock { get; set; }
+        public int ProductPrice { get; set; }
 
         public Size ProductSize { get; set; }
     }
