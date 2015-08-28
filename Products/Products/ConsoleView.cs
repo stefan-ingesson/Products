@@ -19,13 +19,22 @@ namespace Products
         
             foreach (var item in list)
             {
-                Console.WriteLine(item.ProductName);
+                if (Console.ReadKey().Key == ConsoleKey.D3)
+                {
+                    Console.WriteLine("\n");
+                    Console.WriteLine(item.ProductName);
+                }
+
+
+                else if (Console.ReadKey().Key == ConsoleKey.D4)
+                {
+                    Console.WriteLine("\n");
+                    Console.WriteLine(item.ProductPrice);
+                }
+               
             }
 
-            foreach (var item in list)
-            {
-                Console.WriteLine(item.ProductPrice);
-            }
+           
         }
     }
 }
