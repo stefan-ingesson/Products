@@ -8,11 +8,38 @@ namespace Products
 {
     class Program
     {
-        static void Main(string[] args)
-        {
-            Size s = new BoxSize(1,1,1);
+        static void Main(string[] args) {
+            ProductStorage storage = new ProductStorage();
 
-            string text = s.GetAsText();
+            do
+            {
+                //Add a product
+                Console.WriteLine("Time to create an object. Please enter the following information.");
+                Console.Write("ProductName:");
+                string name = Console.ReadLine();
+                Console.Write("ProductID:");
+                int ID = Int32.Parse(Console.ReadLine());
+                //...
+                Product product = new Product();
+                product.ProductName = name;
+                product.ProductID = ID;
+                product.ProductDescription = "Generic product description.";
+                //...
+
+                
+                storage.AddNewProduct(product);
+                Console.WriteLine("Product added.");
+                Console.WriteLine("Press Esc to quit. Any other key for more products.");
+              
+            } while (Console.ReadKey().Key != ConsoleKey.Escape);
+
+
+            Console.Write("Enter ProductID to remove:");
+            int ID = Int32.Parse(Console.ReadLine());
+            storage.RemoveProductID(ID);
+
+
+
 
 
 

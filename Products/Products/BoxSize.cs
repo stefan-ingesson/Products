@@ -10,28 +10,45 @@ namespace Products
     {
         public BoxSize(int l, int w, int h)
         {
-            L = l;
-            W = w;
-            H = h;
+           Initialize(l,w,h);
         }
         public BoxSize(int[] size)
         {
-            L = size[0];
-            W = size[1];
-            H = size[2];
+            Initialize(size[0],size[1],size[2]);
         }
 
         public BoxSize(BoxSize box)
         {
-            L = box.L;
-            W = box.W;
-            H = box.H;
+            Initialize(box.L, box.W, box.H);
         }
-        
-        public int L { get; set; }
-        public int W { get; set; }
-        public int H { get; set; }
+        private void Initialize(int l,int w, int h)
+        {
+            if (l < 1 || w < 1 || h < 1)
+            {
+                throw new ArgumentException();
+            }
+            length = l;
+            width = w;
+            height = h;
+        }
 
+        private int length;
+        private int width;
+        private int height;
+        
+        public int L {
+            get { return length; }
+                }
+        public int W
+        {
+            get { return width; }
+        }
+        public int H
+        {
+            get { return height; }
+        }
+
+        
         public override string GetAsText()
         {
             return String.Format("{0}x{1}x{2} mm", L, W, H);
