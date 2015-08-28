@@ -6,6 +6,16 @@
         {
         }
 
+        public Product(string name,int id, string description, double weight, Size size, bool instock = false )
+        {
+            ProductName = name;
+            ProductID = id;
+            ProductDescription = description;
+            Weight = weight;
+            InStock = instock;
+            ProductSize = size;
+        }
+
         public string ProductName { get; set; }
         public int ProductID { get; set; }
         public string ProductDescription { get; set; }
