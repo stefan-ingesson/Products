@@ -18,11 +18,11 @@ namespace Products
                 Console.Write("ProductName:");
                 string name = Console.ReadLine();
                 Console.Write("ProductID:");
-                int ID = Int32.Parse(Console.ReadLine());
+                int id = Int32.Parse(Console.ReadLine());
                 //...
                 Product product = new Product();
                 product.ProductName = name;
-                product.ProductID = ID;
+                product.ProductID = id;
                 product.ProductDescription = "Generic product description.";
                 //...
 

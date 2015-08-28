@@ -1,6 +1,7 @@
 ﻿using Products;
 using System;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using System.Collections.Generic;
 
 namespace TestProject1
 {
@@ -70,10 +71,13 @@ namespace TestProject1
         public void SortProductsByNamePass()
         {
             ProductStorage ps = new ProductStorage();
-            Product p = new Product("Testprodukt", 1, "Testdescription", 1.0f, new BoxSize(1, 1, 1), true);
-            ps.AddNewProduct(p);
-            p = new Product("ABC produkt", 1, "Testdescription", 1.0f, new BoxSize(1, 1, 1), true);
+            Product p1 = new Product("Testprodukt", 1, "Testdescription", 1.0f, new BoxSize(1, 1, 1), true);
+            Product p2 = new Product("ABC produkt", 1, "Testdescription", 1.0f, new BoxSize(1, 1, 1), true);
+            ps.AddNewProduct(p1);
+            ps.AddNewProduct(p2);
 
+            List<Product> sortedlist = ps.ProductsSortedByName();
+            Assert.AreEqual(sortedlist[0].ProductName, "ABC produkt");
         }
         [TestMethod]
         public void SortProductsByPricePass()

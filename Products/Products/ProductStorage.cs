@@ -18,6 +18,12 @@ namespace Products
             return productdb.Count;
         }
 
+        public List<Product> ProductsSortedByName()
+        {
+            return null;
+        }
+
+
         public void RemoveProductID(int productid)
         {
             foreach (var product in productdb)
