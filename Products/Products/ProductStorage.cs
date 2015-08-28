@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 
 namespace Products
 {
@@ -20,7 +21,11 @@ namespace Products
 
         public List<Product> ProductsSortedByName()
         {
-            return null;
+            var subset = from product in productdb
+                         orderby product.ProductName
+                         select product;
+            
+            return subset.ToList<Product>();
         }
 
 

@@ -38,11 +38,14 @@ namespace Products
             int ID = Int32.Parse(Console.ReadLine());
             storage.RemoveProductID(ID);
 
+            var prodlist = storage.ProductsSortedByName();
+            foreach (var item in prodlist)
+            {
+                Console.WriteLine(item.ProductName);
+            }
 
-
-
-
-
+            while (Console.ReadKey().Key != ConsoleKey.Escape) ;
+           
         }
     }
 }

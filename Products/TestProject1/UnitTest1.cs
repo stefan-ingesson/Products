@@ -31,13 +31,13 @@ namespace TestProject1
             Size s = new BoxSize(bs);
             string text = s.GetAsText();
             Assert.AreEqual("1x1x1 mm", text);
-        }
+       }
         
         [TestMethod]
         [ExpectedException(typeof(ArgumentException), "Side length values less than 1 was inappropriately allowed.")]
         public void TestofBoxSizeInvalidValues()
         {
-            Size s = new BoxSize(-1,0,-1);
+                Size s = new BoxSize(-1, 0, -1);
         }
 
         [TestMethod]

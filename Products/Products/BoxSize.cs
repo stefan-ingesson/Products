@@ -25,7 +25,7 @@ namespace Products
         {
             if (l < 1 || w < 1 || h < 1)
             {
-                throw new ArgumentException();
+               throw new ArgumentException();
             }
             length = l;
             width = w;
