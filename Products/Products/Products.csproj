@@ -44,6 +44,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="BoxSize.cs" />
+    <Compile Include="ConsoleView.cs" />
+    <Compile Include="Controller.cs" />
+    <Compile Include="IView.cs" />
     <Compile Include="Product.cs" />
     <Compile Include="ProductStorage.cs" />
     <Compile Include="Program.cs" />
