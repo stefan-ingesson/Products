@@ -1,6 +1,11 @@
 ﻿namespace Products
 {
-    public class Size
+    public abstract class Size
     {
+        public virtual string GetAsText() {
+            return "";
+        }
+
+        public virtual int GetAsInt() { return 1; }
     }
 }

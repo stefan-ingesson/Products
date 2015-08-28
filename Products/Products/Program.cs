@@ -10,6 +10,11 @@ namespace Products
     {
         static void Main(string[] args)
         {
+            Size s = new BoxSize(1,1,1);
+
+            string text = s.GetAsText();
+
+
 
         }
     }
