@@ -26,5 +26,12 @@ namespace ProductsMVC.Controllers
 
             return View();
         }
+
+        public ActionResult FAQ(string name)
+        {
+            ViewBag.Name = name;
+           
+            return View();
+        }
     }
 }
