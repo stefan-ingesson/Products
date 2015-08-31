@@ -1,5 +1,7 @@
-﻿using System;
+﻿using ProductsMVC.Models;
+using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
@@ -12,6 +14,8 @@ namespace ProductsMVC
     {
         protected void Application_Start()
         {
+ //           Database.SetInitializer<ProductDbContext>(
+ //new DropCreateDatabaseIfModelChanges<ProductDbContext>());
             AreaRegistration.RegisterAllAreas();
             FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
             RouteConfig.RegisterRoutes(RouteTable.Routes);
