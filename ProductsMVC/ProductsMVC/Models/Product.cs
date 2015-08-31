@@ -9,6 +9,7 @@ namespace ProductsMVC.Models
         public int ID { get; set; }
         public float Price { get; set; }
         public long ArticleNumber { get; set; }
+        public string ImageUrl { get; set; }
     }
 
     public class ProductDbContext : DbContext

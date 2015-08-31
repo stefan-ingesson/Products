@@ -173,6 +173,10 @@
     <Compile Include="Migrations\201508310840575_ArticleNumber.Designer.cs">
       <DependentUpon>201508310840575_ArticleNumber.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201508310905095_ImageUrl.cs" />
+    <Compile Include="Migrations\201508310905095_ImageUrl.Designer.cs">
+      <DependentUpon>201508310905095_ImageUrl.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\IdentityModels.cs" />
@@ -260,6 +264,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201508310840575_ArticleNumber.resx">
       <DependentUpon>201508310840575_ArticleNumber.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201508310905095_ImageUrl.resx">
+      <DependentUpon>201508310905095_ImageUrl.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
