@@ -18,17 +18,21 @@ namespace ProductsMVC.Controllers
         private ProductsMVC.Models.Product.ProductDbContext db = new ProductsMVC.Models.Product.ProductDbContext();
 
 
-        public ViewResult List(int page = 1) 
+        public ViewResult List(string category , int page = 1) 
         { 
             ProductsListViewModel model = new ProductsListViewModel 
-            {Products = db.Products                
+            {
+              Products = db.Products
+             .Where(p => category == null || p.Category == category)
              .OrderBy(p => p.ID)                
              .Skip((page - 1) * PageSize)                
              .Take(PageSize),                
              PagingInfo = new PagingInfo {
                  CurrentPage = page,
                  ItemsPerPage = PageSize,
-                 TotalItems = db.Products.Count()}            
+                 TotalItems = db.Products.Count()
+             },      
+                 CurrentCategory = category
             };
             return View(model);
             
@@ -79,7 +83,7 @@ namespace ProductsMVC.Controllers
             {
                 db.Products.Add(product);
                 db.SaveChanges();
-                return RedirectToAction("Index");
+                return RedirectToAction("List");
             }
 
             return View(product);
@@ -111,7 +115,7 @@ namespace ProductsMVC.Controllers
             {
                 db.Entry(product).State = EntityState.Modified;
                 db.SaveChanges();
-                return RedirectToAction("Index");
+                return RedirectToAction("List");
             }
             return View(product);
         }
@@ -139,7 +143,7 @@ namespace ProductsMVC.Controllers
             Product product = db.Products.Find(id);
             db.Products.Remove(product);
             db.SaveChanges();
-            return RedirectToAction("Index");
+            return RedirectToAction("List");
         }
 
         protected override void Dispose(bool disposing)

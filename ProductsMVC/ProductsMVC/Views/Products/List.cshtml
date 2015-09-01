@@ -22,9 +22,9 @@
         @Html.ActionLink("Details", "Details", new { id = p.ID }) |
         @Html.ActionLink("Delete", "Delete", new { id = p.ID })
     </div>
-
-
 }
 
-
-<div>    @Html.PageLinks(Model.PagingInfo, x => Url.Action("List", new { page = x })) </div>
+<div class="btn-group pull-right">    
+    @Html.PageLinks(Model.PagingInfo, x => Url.Action("List", 
+    new { page = x, category = Model.CurrentCategory })) 
+</div>
