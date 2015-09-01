@@ -12,7 +12,34 @@ namespace ProductsMVC.Controllers
 {
     public class ProductsController : Controller
     {
+
+        public int PageSize = 4;
+
         private ProductsMVC.Models.Product.ProductDbContext db = new ProductsMVC.Models.Product.ProductDbContext();
+
+
+        public ViewResult List(int page = 1) 
+        { 
+            ProductsListViewModel model = new ProductsListViewModel 
+            {Products = db.Products                
+             .OrderBy(p => p.ID)                
+             .Skip((page - 1) * PageSize)                
+             .Take(PageSize),                
+             PagingInfo = new PagingInfo {
+                 CurrentPage = page,
+                 ItemsPerPage = PageSize,
+                 TotalItems = db.Products.Count()}            
+            };
+            return View(model);
+            
+            
+            
+            //return View(db.Products
+            //.OrderBy(p => p.ID)
+            //.Skip((page - 1) * PageSize)
+            //.Take(PageSize)); 
+        }
+
 
         // GET: Products
         public ActionResult Index()

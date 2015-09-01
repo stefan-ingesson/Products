@@ -1,5 +1,7 @@
 ﻿@model IEnumerable<ProductsMVC.Models.Product>
 
+
+
 @{
     ViewBag.Title = "Index";
 }
@@ -14,26 +16,19 @@
 
 
 @foreach (var item in Model)
-{
+    {
 
-    <div class="well">
-        <h3>
-            <strong>@item.Name</strong> <br /> <br />
+        <div class="well">
+            <h3>
+                <strong>@item.Name</strong> <br /> <br />
 
-            <span class="pull-right label labelprimary">@item.Price.ToString("c")</span>
-        </h3>
-        @Html.ActionLink("Edit", "Edit", new { id = item.ID }) |
-        @Html.ActionLink("Details", "Details", new { id = item.ID }) |
-        @Html.ActionLink("Delete", "Delete", new { id = item.ID })
-    </div>
-
-
-
-
-
-
+                <span class="pull-right label labelprimary">@item.Price.ToString("c")</span>
+            </h3>
+            @Html.ActionLink("Edit", "Edit", new { id = item.ID }) |
+            @Html.ActionLink("Details", "Details", new { id = item.ID }) |
+            @Html.ActionLink("Delete", "Delete", new { id = item.ID })
+        </div>
 
 
 }
-
 
