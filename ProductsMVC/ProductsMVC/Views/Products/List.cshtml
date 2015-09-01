@@ -1,0 +1,30 @@
+﻿@model ProductsMVC.Models.ProductsListViewModel
+
+@{    ViewBag.Title = "Products"; }
+
+
+<p>
+    <button type="button" class="btn btn-primary">@Html.ActionLink("Lägg till ny produkt", "Create")</button>
+
+</p>
+
+
+@foreach (var p in Model.Products)
+{
+
+    <div class="well">
+        <h3>
+            <strong>@p.Name</strong> <br /> <br />
+
+            <span class="pull-right label labelprimary">@p.Price.ToString("c")</span>
+        </h3>
+        @Html.ActionLink("Edit", "Edit", new { id = p.ID }) |
+        @Html.ActionLink("Details", "Details", new { id = p.ID }) |
+        @Html.ActionLink("Delete", "Delete", new { id = p.ID })
+    </div>
+
+
+}
+
+
+<div>    @Html.PageLinks(Model.PagingInfo, x => Url.Action("List", new { page = x })) </div>
