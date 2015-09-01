@@ -10,7 +10,7 @@
     @Html.ActionLink("Create New", "Create")
 </p>
 <table class="table">
-    <tr>
+    @*<tr>
         <th>
             @Html.DisplayNameFor(model => model.Name)
         </th>
@@ -22,12 +22,17 @@
             @Html.DisplayNameFor(model => model.ArticleNumber)
         </th>
 
+        <th>
+            @Html.DisplayNameFor(model => model.Category)
+        </th>
+
         <th></th>
-    </tr>
+    </tr>*@
 
 @foreach (var item in Model) {
     <tr>
-        <td>
+
+        @*<td>
             @Html.DisplayFor(modelItem => item.Name)
         </td>
         <td>
@@ -38,11 +43,28 @@
         </td>
 
         <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.ID }) |
-            @Html.ActionLink("Details", "Details", new { id=item.ID }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.ID })
-        </td>
-    </tr>
+            @Html.DisplayFor(modelItem => item.Category)
+        </td>*@
+
+
+        <div class="well">        <h3>            <strong>@item.Name</strong> <br /> <br />
+                                      @*<span class="lead"> 
+                                                              <img src="~/Content/Picture folder/fotboll.jpg"   />
+
+</span>*@          
+             <span class="pull-right label labelprimary">@item.Price.ToString("c")</span>        </h3>   
+            @Html.ActionLink("Edit", "Edit", new { id = item.ID }) |
+            @Html.ActionLink("Details", "Details", new { id = item.ID }) |
+            @Html.ActionLink("Delete", "Delete", new { id = item.ID })
+            </div> 
+        <div class="btn-group pull-right"></div>
+
+
+
+            <td>
+                
+            </td>
+</tr>
 }
 
 </table>
