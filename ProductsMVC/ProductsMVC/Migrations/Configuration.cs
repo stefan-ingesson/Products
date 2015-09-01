@@ -5,7 +5,7 @@ namespace ProductsMVC.Migrations
     using System.Data.Entity.Migrations;
     using System.Linq;
 
-    internal sealed class Configuration : DbMigrationsConfiguration<ProductsMVC.Models.ProductDbContext>
+    internal sealed class Configuration : DbMigrationsConfiguration<ProductsMVC.Models.Product.ProductDbContext>
     {
         public Configuration()
         {
@@ -13,7 +13,7 @@ namespace ProductsMVC.Migrations
             ContextKey = "ProductsMVC.Models.ProductDbContext";
         }
 
-        protected override void Seed(ProductsMVC.Models.ProductDbContext context)
+        protected override void Seed(ProductsMVC.Models.Product.ProductDbContext context)
         {
             //  This method will be called after migrating to the latest version.
 

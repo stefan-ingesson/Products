@@ -12,7 +12,7 @@ namespace ProductsMVC.Controllers
 {
     public class ProductsController : Controller
     {
-        private ProductDbContext db = new ProductDbContext();
+        private ProductsMVC.Models.Product.ProductDbContext db = new ProductsMVC.Models.Product.ProductDbContext();
 
         // GET: Products
         public ActionResult Index()
