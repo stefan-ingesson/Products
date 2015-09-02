@@ -24,9 +24,7 @@ new
     controller = "Products",
     action = "List",
     category = (string)null,
-    page = 1,
-
-
+    page = 1
 }
 );
             routes.MapRoute(null,
@@ -35,18 +33,14 @@ new
             routes.MapRoute(null, "{category}", new { controller = "Products", action = "List", page = 1 });
             routes.MapRoute(null, "{category}/Page{page}", new { controller = "Products", action = "List" }, new { page = @"\d+" });
             routes.MapRoute(null, "{controller}/{action}");
-
-        
-        }
-
-     
-
-
-
-
-
         }
     }
+
+
+
+
+
+
 
 
     // routes.MapRoute(
@@ -66,7 +60,7 @@ new
     //    name: "",
     //    url: "Test/{controller}/{action}/{name}/{id}"
     //    );
-
+}
 
 
 
