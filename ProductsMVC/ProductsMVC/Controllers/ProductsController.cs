@@ -7,6 +7,8 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using ProductsMVC.Models;
+using System.Web.UI.WebControls;
+using System.IO;
 
 namespace ProductsMVC.Controllers
 {
@@ -18,8 +20,14 @@ namespace ProductsMVC.Controllers
         private ProductsMVC.Models.Product.ProductDbContext db = new ProductsMVC.Models.Product.ProductDbContext();
 
 
+
+
+      
+
+
         public ViewResult List(string category , int page = 1) 
-        { 
+        {
+
             ProductsListViewModel model = new ProductsListViewModel 
             {
               Products = db.Products
@@ -34,6 +42,7 @@ namespace ProductsMVC.Controllers
              },      
                  CurrentCategory = category
             };
+
             return View(model);
             
             
@@ -77,8 +86,9 @@ namespace ProductsMVC.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "ID,Name,Price,ArticleNumber")] Product product)
+        public ActionResult Create([Bind(Include = "ID,Name,Price,ArticleNumber,Category, ImageUrl")] Product product)
         {
+
             if (ModelState.IsValid)
             {
                 db.Products.Add(product);
@@ -88,6 +98,10 @@ namespace ProductsMVC.Controllers
 
             return View(product);
         }
+
+
+
+
 
         // GET: Products/Edit/5
         public ActionResult Edit(int? id)
@@ -109,7 +123,7 @@ namespace ProductsMVC.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "ID,Name,Price,ArticleNumber")] Product product)
+        public ActionResult Edit([Bind(Include = "ID,Name,Price,ArticleNumber,Category")] Product product)
         {
             if (ModelState.IsValid)
             {
