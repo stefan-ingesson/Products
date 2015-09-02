@@ -9,7 +9,7 @@ namespace ProductsMVC.Controllers
 {
     public class NavigationController : Controller
     {
-         private ProductsMVC.Models.Product.ProductDbContext db = new ProductsMVC.Models.Product.ProductDbContext();
+         private ProductDb db = new ProductDb();
 
       
 

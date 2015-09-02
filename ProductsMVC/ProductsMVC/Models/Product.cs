@@ -1,4 +1,5 @@
-﻿using ProductsMVC.Migrations;
+﻿
+using ProductsMVC.Models;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
@@ -17,12 +18,7 @@ namespace ProductsMVC.Models
         public long ArticleNumber { get; set; }
         public string Category { get; set; }
         public string ImageUrl { get; set; }
-        public byte[] ImageData { get; set; }
-        public string ImageMimeType
-        {
-            get;
-            set;
-        }
+   
 
         //public class Category
         //{
@@ -31,10 +27,11 @@ namespace ProductsMVC.Models
         //    public string Name { get; set; }
         //    public ICollection<Product> Products { get; set; }
         //}
-        public class ProductDbContext : DbContext
+     
+    }
+    public class ProductDb : DbContext
         {
             public DbSet<Product> Products { get; set; }
             //public DbSet<Category> Categories { get; set; }
         }
-    }
 }

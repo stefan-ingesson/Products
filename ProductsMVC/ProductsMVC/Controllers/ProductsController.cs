@@ -17,13 +17,7 @@ namespace ProductsMVC.Controllers
 
         public int PageSize = 4;
 
-        private ProductsMVC.Models.Product.ProductDbContext db = new ProductsMVC.Models.Product.ProductDbContext();
-
-
-
-
-      
-
+        private ProductDb db = new ProductDb();
 
         public ViewResult List(string category , int page = 1) 
         {
