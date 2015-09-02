@@ -22,43 +22,63 @@ namespace ProductsMVC.Controllers
 
 
 
-      
 
 
-        public ViewResult List(string category , int page = 1) 
+
+        public ViewResult List(string category,string searchString, int page = 1 ) 
         {
+
 
             ProductsListViewModel model = new ProductsListViewModel 
             {
               Products = db.Products
-             .Where(p => category == null || p.Category == category)
+             .Where(p => category == null || p.Category == category || searchString == p.Name)
              .OrderBy(p => p.ID)                
              .Skip((page - 1) * PageSize)                
-             .Take(PageSize),                
+             .Take(PageSize),
+              
              PagingInfo = new PagingInfo {
                  CurrentPage = page,
                  ItemsPerPage = PageSize,
                  TotalItems = db.Products.Count()
-             },      
+             }          
+             
+             ,      
                  CurrentCategory = category
             };
 
+            if (!String.IsNullOrEmpty(searchString))
+            {
+                var products = from m in db.Products
+                             select m; 
+               products = db.Products.Where(s => s.Name.Contains(searchString));
+               return View("List", products);
+            } 
+
             return View(model);
+
             
             
-            
-            //return View(db.Products
-            //.OrderBy(p => p.ID)
-            //.Skip((page - 1) * PageSize)
-            //.Take(PageSize)); 
+          
         }
+
+
+
 
 
         // GET: Products
-        public ActionResult Index()
-        {
-            return View(db.Products.ToList());
-        }
+        //public ActionResult Index(string searchString)
+        //{      
+           
+        //}
+
+
+            //return View(db.Products.ToList());
+        
+
+
+      
+
 
         // GET: Products/Details/5
         public ActionResult Details(int? id)
