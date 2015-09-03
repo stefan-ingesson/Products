@@ -10,23 +10,29 @@
 
 <p>
     <button type="button" class="btn btn-primary">@Html.ActionLink("Lägg till ny produkt", "Create")</button>
+    @using (Html.BeginForm("Index", "Products", FormMethod.Get))
+{
+    <p style="margin-right: 75%;">
+        Sök på produkt: @Html.TextBox("searchString")
+        <input type="submit" value="Filtrera" style=" margin-left: 35%; margin-top: 3%;" />
+    </p>
+    }
 
-</p>
 
 
-
-@foreach (var item in Model)
+@foreach (var p in Model)
     {
 
         <div class="well">
             <h3>
-                <strong>@item.Name</strong> <br /> <br />
+                <strong>@p.Name</strong> <br /> <br />
 
-                <span class="pull-right label labelprimary">@item.Price.ToString("c")</span>
+                <span class="pull-right label labelprimary">@p.Price.ToString("c")</span>
+                <a href="@p.ImageUrl"><img class="img-rounded img-small" src="@p.ImageUrl" style="width:100px;height:60px;" /></a>
             </h3>
-            @Html.ActionLink("Edit", "Edit", new { id = item.ID }) |
-            @Html.ActionLink("Details", "Details", new { id = item.ID }) |
-            @Html.ActionLink("Delete", "Delete", new { id = item.ID })
+            @Html.ActionLink("Edit", "Edit", new { id = p.ID }) |
+            @Html.ActionLink("Details", "Details", new { id = p.ID }) |
+            @Html.ActionLink("Delete", "Delete", new { id = p.ID })
         </div>
 
 

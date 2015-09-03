@@ -14,8 +14,10 @@ namespace ProductsMVC.Controllers
       
 
       
-          public PartialViewResult Menu()
-          {
+          public PartialViewResult Menu(string category = null) 
+          { 
+                ViewBag.SelectedCategory = category; 
+
               IEnumerable<string> categories = db.Products
                 .Select(x => x.Category)
                 .Distinct()

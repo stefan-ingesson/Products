@@ -5,11 +5,13 @@
 
 <p>
     <button type="button" class="btn btn-primary">@Html.ActionLink("Lägg till ny produkt", "Create")</button>
+@using (Html.BeginForm("Index", "Products", FormMethod.Get))
+{ 
 <p style="margin-right: 75%;">
     Sök på produkt: @Html.TextBox("searchString")
     <input type="submit" value="Filtrera" style=" margin-left: 35%; margin-top: 3%;" />
 </p>
-</p>
+}
 
 
 @foreach (var p in Model.Products)

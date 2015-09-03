@@ -19,40 +19,53 @@ namespace ProductsMVC.Controllers
 
         private ProductDb db = new ProductDb();
 
-        public ViewResult List(string category , int page = 1) 
+        public ViewResult List(string category, string searchString, int page = 1) 
         {
 
             ProductsListViewModel model = new ProductsListViewModel 
             {
               Products = db.Products
-             .Where(p => category == null || p.Category == category)
+             .Where(p => category == null || p.Category == category  || searchString == p.Name)
              .OrderBy(p => p.ID)                
              .Skip((page - 1) * PageSize)                
-             .Take(PageSize),                
+             .Take(PageSize),    
+            
              PagingInfo = new PagingInfo {
                  CurrentPage = page,
                  ItemsPerPage = PageSize,
                  TotalItems = db.Products.Count()
+
+
              },      
                  CurrentCategory = category
+
+
             };
 
-            return View(model);
-            
-            
-            
-            //return View(db.Products
-            //.OrderBy(p => p.ID)
-            //.Skip((page - 1) * PageSize)
-            //.Take(PageSize)); 
-        }
-
+            return View(model);   
+            }
 
         // GET: Products
-        public ActionResult Index()
+
+        public ActionResult Index(string searchString)
         {
-            return View(db.Products.ToList());
+            var products = from p in db.Products
+                         select p;
+
+            if (!String.IsNullOrEmpty(searchString))
+            {
+                products = products.Where(p => p.Name.Contains(searchString));
+            }
+            return View(products);
         }
+
+
+
+
+        //public ActionResult Index()
+        //{
+        //    return View(db.Products.ToList());
+        //}
 
         // GET: Products/Details/5
         public ActionResult Details(int? id)
@@ -117,7 +130,7 @@ namespace ProductsMVC.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "ID,Name,Price,ArticleNumber,Category")] Product product)
+        public ActionResult Edit([Bind(Include = "ID,Name,Price,ArticleNumber,Category, ImageUrl")] Product product)
         {
             if (ModelState.IsValid)
             {
