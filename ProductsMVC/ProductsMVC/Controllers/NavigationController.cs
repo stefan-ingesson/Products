@@ -12,8 +12,6 @@ namespace ProductsMVC.Controllers
          private ProductDb db = new ProductDb();
 
       
-
-      
           public PartialViewResult Menu(string category = null) 
           { 
                 ViewBag.SelectedCategory = category; 

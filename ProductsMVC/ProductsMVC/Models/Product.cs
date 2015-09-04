@@ -18,7 +18,7 @@ namespace ProductsMVC.Models
         public long ArticleNumber { get; set; }
         public string Category { get; set; }
         public string ImageUrl { get; set; }
-   
+       
 
         //public class Category
         //{

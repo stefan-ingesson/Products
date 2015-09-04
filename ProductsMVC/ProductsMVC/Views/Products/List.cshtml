@@ -8,10 +8,11 @@
 @using (Html.BeginForm("Index", "Products", FormMethod.Get))
 { 
 <p style="margin-right: 75%;">
-    Sök på produkt: @Html.TextBox("searchString")
+    Sök på produkt: @Html.TextBox("searchProduct")
     <input type="submit" value="Filtrera" style=" margin-left: 35%; margin-top: 3%;" />
 </p>
 }
+
 
 
 @foreach (var p in Model.Products)
@@ -27,7 +28,7 @@
             <a href="@p.ImageUrl"><img class="img-rounded img-small" src="@p.ImageUrl"style="width:100px;height:60px;" /></a>
         </h3>
         @Html.ActionLink("Edit", "Edit", new { id = p.ID }) |
-        @Html.ActionLink("Details", "Details", new { id = p.ID }) |
+        @Html.ActionLink("Details", "Details", new { id = p.ID }) 
         @Html.ActionLink("Delete", "Delete", new { id = p.ID })
     </div>
 }

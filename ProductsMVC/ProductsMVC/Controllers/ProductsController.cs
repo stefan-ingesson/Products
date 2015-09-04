@@ -19,42 +19,43 @@ namespace ProductsMVC.Controllers
 
         private ProductDb db = new ProductDb();
 
-        public ViewResult List(string category, string searchString, int page = 1) 
+        public ViewResult List(string category, string searchString, int page = 1)
         {
 
-            ProductsListViewModel model = new ProductsListViewModel 
+            ProductsListViewModel model = new ProductsListViewModel
             {
-              Products = db.Products
-             .Where(p => category == null || p.Category == category  || searchString == p.Name)
-             .OrderBy(p => p.ID)                
-             .Skip((page - 1) * PageSize)                
-             .Take(PageSize),    
-            
-             PagingInfo = new PagingInfo {
-                 CurrentPage = page,
-                 ItemsPerPage = PageSize,
-                 TotalItems = db.Products.Count()
+                Products = db.Products
+               .Where(p => category == null || p.Category == category || searchString == p.Name)
+               .OrderBy(p => p.ID)
+               .Skip((page - 1) * PageSize)
+               .Take(PageSize),
+
+                PagingInfo = new PagingInfo
+                {
+                    CurrentPage = page,
+                    ItemsPerPage = PageSize,
+                    TotalItems = db.Products.Count()
 
 
-             },      
-                 CurrentCategory = category
+                },
+                CurrentCategory = category
 
 
             };
 
-            return View(model);   
-            }
+            return View(model);
+        }
 
         // GET: Products
 
-        public ActionResult Index(string searchString)
+        public ActionResult Index(string searchProduct)
         {
             var products = from p in db.Products
-                         select p;
+                           select p;
 
-            if (!String.IsNullOrEmpty(searchString))
+            if (!String.IsNullOrEmpty(searchProduct))
             {
-                products = products.Where(p => p.Name.Contains(searchString));
+                products = products.Where(p => p.Name.Contains(searchProduct));
             }
             return View(products);
         }
@@ -83,6 +84,7 @@ namespace ProductsMVC.Controllers
         }
 
         // GET: Products/Create
+       
         public ActionResult Create()
         {
             return View();
@@ -93,6 +95,8 @@ namespace ProductsMVC.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize]
+        [Authorize(Users = "stefan.ingesson@gmail.com")]
         public ActionResult Create([Bind(Include = "ID,Name,Price,ArticleNumber,Category, ImageUrl")] Product product)
         {
 
@@ -111,6 +115,7 @@ namespace ProductsMVC.Controllers
 
 
         // GET: Products/Edit/5
+        [Authorize(Users = "stefan.ingesson@gmail.com")]
         public ActionResult Edit(int? id)
         {
             if (id == null)
@@ -130,6 +135,8 @@ namespace ProductsMVC.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize]
+        [Authorize(Users = "stefan.ingesson@gmail.com")]
         public ActionResult Edit([Bind(Include = "ID,Name,Price,ArticleNumber,Category, ImageUrl")] Product product)
         {
             if (ModelState.IsValid)
@@ -142,6 +149,8 @@ namespace ProductsMVC.Controllers
         }
 
         // GET: Products/Delete/5
+        [Authorize]
+        [Authorize(Users = "stefan.ingesson@gmail.com")]
         public ActionResult Delete(int? id)
         {
             if (id == null)
@@ -157,7 +166,8 @@ namespace ProductsMVC.Controllers
         }
 
         // POST: Products/Delete/5
-        [HttpPost, ActionName("Delete")]
+
+        [HttpPost, ActionName("Delete")]  
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {

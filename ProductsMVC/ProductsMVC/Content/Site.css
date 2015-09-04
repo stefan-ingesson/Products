@@ -66,7 +66,7 @@ textarea {
     min-height: 50px;
     margin-bottom: 20px;
     border: 1px solid transparent;
-    width: 75%;
+    width: 100%;
 }
 
 
@@ -79,8 +79,14 @@ textarea {
     filter: progid:DXImageTransform.Microsoft.gradient(enabled = false);
     background-repeat: repeat-x;
     border-radius: 4px;
+     width: 100%;
 }
 
 .navbar-inverse .navbar-brand {
     color: #BCC144;
+}
+
+.btn-group pull-right
+{
+    float: right;
 }
