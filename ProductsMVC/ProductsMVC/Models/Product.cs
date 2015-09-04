@@ -14,7 +14,7 @@ namespace ProductsMVC.Models
 
         public string Name { get; set; }
         public int ID { get; set; }
-        public float Price { get; set; }
+        public decimal Price { get; set; }
         public long ArticleNumber { get; set; }
         public string Category { get; set; }
         public string ImageUrl { get; set; }
@@ -34,4 +34,6 @@ namespace ProductsMVC.Models
             public DbSet<Product> Products { get; set; }
             //public DbSet<Category> Categories { get; set; }
         }
+
+    
 }
