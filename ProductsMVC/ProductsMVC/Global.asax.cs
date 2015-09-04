@@ -1,4 +1,5 @@
-﻿using ProductsMVC.Models;
+﻿using ProductsMVC.Infrastructure.Binders;
+using ProductsMVC.Models;
 using System;
 using System.Collections.Generic;
 using System.Data.Entity;
@@ -14,6 +15,9 @@ namespace ProductsMVC
     {
         protected void Application_Start()
         {
+
+            ModelBinders.Binders.Add(typeof(Cart), new CartModelBinder());
+
  //           Database.SetInitializer<ProductsMVC.Models.Product.ProductDbContext>(
  //new DropCreateDatabaseIfModelChanges<ProductsMVC.Models.Product.ProductDbContext>());
             AreaRegistration.RegisterAllAreas();

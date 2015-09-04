@@ -170,6 +170,7 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="HtmlHelpers\PagingHelpers.cs" />
+    <Compile Include="Infrastructure\Binders\CartModelBinder.cs" />
     <Compile Include="Migrations\201508310818055_InitialCreate.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -273,6 +274,7 @@
     <Content Include="Views\Products\List.cshtml" />
     <Content Include="Views\Navigation\Menu.cshtml" />
     <Content Include="Views\Cart\Index.cshtml" />
+    <Content Include="Views\Cart\Summary.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

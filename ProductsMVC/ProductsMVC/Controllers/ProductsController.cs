@@ -84,7 +84,7 @@ namespace ProductsMVC.Controllers
         }
 
         // GET: Products/Create
-       
+       [Authorize(Users = "stefan.ingesson@gmail.com")]
         public ActionResult Create()
         {
             return View();
