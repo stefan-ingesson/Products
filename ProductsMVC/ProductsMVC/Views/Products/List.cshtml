@@ -31,10 +31,11 @@
 
       @using Microsoft.AspNet.Identity
         @if (Request.IsAuthenticated)
-        {
-            @Html.ActionLink("Details", "Details", new { id = p.ID }) <br />
-            @Html.ActionLink("Edit", "Edit", new { id = p.ID }) <br />
-            @Html.ActionLink("Delete", "Delete", new { id = p.ID })
+        {<p>
+             <button type="button" class="btn btn-primary">@Html.ActionLink("Details", "Details", new { id = p.ID }) </button>
+              <button type="button" class="btn btn-primary">   @Html.ActionLink("Edit", "Edit", new { id = p.ID }) </button>
+             <button type="button" class="btn btn-primary">  @Html.ActionLink("Delete", "Delete", new { id = p.ID }) </button>
+</p>
         }
         else
         {

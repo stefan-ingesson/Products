@@ -20,9 +20,12 @@
     <div class="navbar navbar-inverse" role="navigation">
         <a class="navbar-brand" href="#">JANNES ALLT I ALLO AB</a>
 
-
         <div class="btn-group pull-right">
-            @Html.Partial("_LoginPartial")
+            @Html.Partial("_LoginPartial") </div> <br /> <br />
+
+            <div id="categories" class="col-xs-push-5">  @Html.Action("Summary", "Cart") </div> <br />
+
+
 
 
         </div>
@@ -30,11 +33,14 @@
 
     </div>    <div class="row panel">
         <div id="categories" class="col-xs-3">            @Html.Action("Menu", "Navigation")        </div>
-        @Html.Action("Summary", "Cart")
-        @if (Request.IsAuthenticated)
-        {
-            <button type="button" class="btn btn-primary">@Html.ActionLink("Lägg till ny produkt", "Create")</button>
-        }
+
+                  @if (Request.IsAuthenticated)
+                  {
+                      <button type="button" class="btn btn-primary">@Html.ActionLink("Lägg till ny produkt", "Create")</button>
+                  }
+
+                
+      
 
 
         <div class="col-xs-8">            @RenderBody()        </div>

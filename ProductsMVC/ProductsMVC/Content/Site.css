@@ -28,8 +28,8 @@ textarea {
 
 .well {
     min-height: 15px;
-    padding: 5px;
-    margin-bottom: 20px;
+    padding: 20px;
+    margin-bottom: 15px;
     background-color: #f5f5f5;
     border: 1px solid #e3e3e3;
     border-radius: 4px;
@@ -87,7 +87,27 @@ textarea {
     color: #BCC144;
 }
 
-.btn-group pull-right
+
+/*Ändrar storlek på min well*/
+.col-xs-8 {
+    width: 50.66666667%;
+}
+
+/*Flyttar min checkoutknapp*/
+.navbar-btn {
+    margin-top: 8px;
+    margin-bottom: 8px;
+    margin-left: 10px;
+}
+
+
+.navbar-right {
+    float: right !important;
+    margin-right: 5px;
+}
+
+
+nav navbar-nav navbar-right
 {
-    float: right;
+    position: relative;
 }
