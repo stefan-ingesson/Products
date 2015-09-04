@@ -10,8 +10,6 @@ namespace ProductsMVC.Models
     public class Product
     {
 
-
-
         public string Name { get; set; }
         public int ID { get; set; }
         public decimal Price { get; set; }
