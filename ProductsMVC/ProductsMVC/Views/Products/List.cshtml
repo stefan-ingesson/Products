@@ -27,9 +27,19 @@
 
             <a href="@p.ImageUrl"><img class="img-rounded img-small" src="@p.ImageUrl"style="width:100px;height:60px;" /></a>
         </h3>
-        @Html.ActionLink("Edit", "Edit", new { id = p.ID }) |
-        @Html.ActionLink("Details", "Details", new { id = p.ID }) 
-        @Html.ActionLink("Delete", "Delete", new { id = p.ID })
+      @using Microsoft.AspNet.Identity
+        @if (Request.IsAuthenticated)
+        {
+            @Html.ActionLink("Details", "Details", new { id = p.ID }) <br />
+            @Html.ActionLink("Edit", "Edit", new { id = p.ID }) <br />
+            @Html.ActionLink("Delete", "Delete", new { id = p.ID })
+        }
+        else
+        {
+            @Html.ActionLink("Details", "Details", new { id = p.ID })
+        }
+       
+       
     </div>
 }
 

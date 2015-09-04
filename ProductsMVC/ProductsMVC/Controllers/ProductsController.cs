@@ -166,7 +166,7 @@ namespace ProductsMVC.Controllers
         }
 
         // POST: Products/Delete/5
-
+         [Authorize(Users = "stefan.ingesson@gmail.com")]
         [HttpPost, ActionName("Delete")]  
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
