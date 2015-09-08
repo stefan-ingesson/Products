@@ -10,10 +10,25 @@ namespace ProductsMVC.Models
     public class Product
     {
 
+
+
+        [Display(Name = "Name", ResourceType = typeof(Resources.Resources))]
+        [Required(ErrorMessageResourceType = typeof(Resources.Resources),
+                  ErrorMessageResourceName = "NameRequiredError")]     
         public string Name { get; set; }
         public int ID { get; set; }
+
+        [Display(Name = "Price", ResourceType = typeof(Resources.Resources))]
+        [Required(ErrorMessageResourceType = typeof(Resources.Resources),
+                  ErrorMessageResourceName = "PriceRequiredError")]   
         public decimal Price { get; set; }
+        [Display(Name = "ArticleNumber", ResourceType = typeof(Resources.Resources))]
+        [Required(ErrorMessageResourceType = typeof(Resources.Resources),
+                  ErrorMessageResourceName = "ArticleNumberRequiredError")]  
         public long ArticleNumber { get; set; }
+        [Display(Name = "Category", ResourceType = typeof(Resources.Resources))]
+        [Required(ErrorMessageResourceType = typeof(Resources.Resources),
+                  ErrorMessageResourceName = "CategoryRequiredError")]  
         public string Category { get; set; }
         public string ImageUrl { get; set; }
        

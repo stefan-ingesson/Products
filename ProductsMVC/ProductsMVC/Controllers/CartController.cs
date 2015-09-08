@@ -7,7 +7,7 @@ using System.Web.Mvc;
 
 namespace ProductsMVC.Controllers
 {
-    public class CartController : Controller
+    public class CartController : BaseController
     {
         private ProductDb db = new ProductDb();
 

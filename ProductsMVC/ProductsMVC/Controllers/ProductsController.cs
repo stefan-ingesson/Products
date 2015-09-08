@@ -9,10 +9,11 @@ using System.Web.Mvc;
 using ProductsMVC.Models;
 using System.Web.UI.WebControls;
 using System.IO;
+using ProductsMVC.Helpers;
 
 namespace ProductsMVC.Controllers
 {
-    public class ProductsController : Controller
+    public class ProductsController : BaseController
     {
 
         public int PageSize = 4;
@@ -176,6 +177,27 @@ namespace ProductsMVC.Controllers
             db.SaveChanges();
             return RedirectToAction("List");
         }
+
+
+         public ActionResult SetCulture(string culture)
+         {
+             // Validate input
+             culture = CultureHelper.GetImplementedCulture(culture);
+             // Save culture in a cookie
+             HttpCookie cookie = Request.Cookies["_culture"];
+             if (cookie != null)
+                 cookie.Value = culture;   // update cookie value
+             else
+             {
+                 cookie = new HttpCookie("_culture");
+                 cookie.Value = culture;
+                 cookie.Expires = DateTime.Now.AddYears(1);
+             }
+             Response.Cookies.Add(cookie);
+             return RedirectToAction("List");
+         }                
+
+
 
         protected override void Dispose(bool disposing)
         {

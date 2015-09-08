@@ -7,7 +7,7 @@ using System.Web.Mvc;
 
 namespace ProductsMVC.Controllers
 {
-    public class NavigationController : Controller
+    public class NavigationController : BaseController
     {
          private ProductDb db = new ProductDb();
 

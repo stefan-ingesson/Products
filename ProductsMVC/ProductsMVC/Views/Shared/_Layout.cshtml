@@ -19,19 +19,52 @@
 
     <div class="navbar navbar-inverse" role="navigation">
         <a class="navbar-brand" href="#">JANNES ALLT I ALLO AB</a>
+ 
+        @{
+
+    var culture = System.Threading.Thread.CurrentThread.CurrentUICulture.Name.ToLowerInvariant();
+}
+
+@helper  selected(string c, string culture)
+{
+    if (c == culture)
+    {
+        @:checked = "checked";
+    }
+}
+
+@using (Html.BeginForm("SetCulture", "Products"))
+{
+    <fieldset>
+        <legend>@Resources.ChooseYourLanguage</legend>
+
+        <div class="control-group">
+            <div class="controls">
+                <label for="en">
+                    <input name="culture" id="en" value="en" type="radio" @selected("en", culture) /> English
+                </label>
+            </div>
+        </div>
+        <div class="control-group">
+            <div class="controls">
+                <label for="sv">
+                    <input name="culture" id="sv" value="sv" type="radio" @selected("sv", culture) /> Swedish
+                </label>
+            </div>
+        </div>
+       
+
+    </fieldset>
+}
+
+
+}
 
         <div class="btn-group pull-right">
             @Html.Partial("_LoginPartial") </div> <br /> <br />
-
             <div id="categories" class="col-xs-push-5">  @Html.Action("Summary", "Cart") </div> <br />
-
-
-
-
         </div>
-
-
-    </div>    <div class="row panel">
+      <div class="row panel">
         <div id="categories" class="col-xs-3">            @Html.Action("Menu", "Navigation")        </div>
 
                   @if (Request.IsAuthenticated)
