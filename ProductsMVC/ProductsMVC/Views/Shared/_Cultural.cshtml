@@ -1,0 +1,52 @@
+﻿
+@{
+
+    var culture = System.Threading.Thread.CurrentThread.CurrentUICulture.Name.ToLowerInvariant();
+}
+
+@helper  selected(string c, string culture)
+{
+    if (c == culture)
+    {
+        @:checked = "checked";
+    }
+}
+
+@using (Html.BeginForm("SetCulture", "Products"))
+{
+    <fieldset>
+        <legend>@Resources.ChooseYourLanguage</legend>
+        
+            <div class="control-group">
+                <div class="cultureimage">
+                    <div class="culture">
+                        <label for="en">
+
+                            <input name="culture" id="en" value="en" type="radio" @selected("en", culture) />
+                            <img src="~/Content/england.jpg" />
+                        </label>
+                    </div>
+            </div>
+            <div class="control-group">
+                <div class="cultureimage">
+                </div>
+                    <label for="sv">
+                        <input name="culture" id="sv" value="sv" type="radio" @selected("sv", culture) />
+                        <img src="~/Content/sverige-flagga1.jpg" />
+              
+                    </label>
+                </div>
+            </div>
+        
+    </fieldset>
+}
+
+@{
+    var bundle = System.Web.Optimization.BundleTable.Bundles.GetRegisteredBundles()
+        .Where(b => b.Path == "~/widgetspecific")
+        .First();
+
+    bundle.Include("~/Scripts/cultural.js");
+}
+
+}

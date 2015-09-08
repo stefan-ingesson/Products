@@ -39,7 +39,10 @@
         }
         else
         {
-            @Html.ActionLink(Resources.Details, "Details", new { id = p.ID })
+
+            <button type="button" class="btn btn-primary">@Html.ActionLink(Resources.Details, "Details", new { id = p.ID }) </button>
+
+      
             @*@Html.ActionLink("Details", "Details", new { id = p.ID })*@
         }
        
@@ -55,15 +58,3 @@
     new { page = x, category = Model.CurrentCategory })) 
 </div>
 
-
-@section Scripts {
-    @Scripts.Render("~/bundles/jqueryval")
-    <script type="text/javascript">
-        (function ($) {
-            $("input[type = 'radio']").click(function () {
-                $(this).parents("form").submit(); // post form
-            });
-
-        })(jQuery);
-    </script>
-}

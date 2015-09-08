@@ -11,81 +11,37 @@
     @Scripts.Render("~/bundles/modernizr")
 
 
-
 </head>
 <body>
 
-
-
     <div class="navbar navbar-inverse" role="navigation">
         <a class="navbar-brand" href="#">JANNES ALLT I ALLO AB</a>
- 
-        @{
-
-    var culture = System.Threading.Thread.CurrentThread.CurrentUICulture.Name.ToLowerInvariant();
-}
-
-@helper  selected(string c, string culture)
-{
-    if (c == culture)
-    {
-        @:checked = "checked";
-    }
-}
-
-@using (Html.BeginForm("SetCulture", "Products"))
-{
-    <fieldset>
-        <legend>@Resources.ChooseYourLanguage</legend>
-
-        <div class="control-group">
-            <div class="controls">
-                <label for="en">
-                    <input name="culture" id="en" value="en" type="radio" @selected("en", culture) /> English
-                </label>
-            </div>
-        </div>
-        <div class="control-group">
-            <div class="controls">
-                <label for="sv">
-                    <input name="culture" id="sv" value="sv" type="radio" @selected("sv", culture) /> Swedish
-                </label>
-            </div>
-        </div>
-       
-
-    </fieldset>
-}
 
 
-}
+        @Html.Partial("_Cultural")
 
         <div class="btn-group pull-right">
-            @Html.Partial("_LoginPartial") </div> <br /> <br />
-            <div id="categories" class="col-xs-push-5">  @Html.Action("Summary", "Cart") </div> <br />
-        </div>
-      <div class="row panel">
+            @Html.Partial("_LoginPartial")
+        </div> <br /> <br />
+        <div id="categories" class="col-xs-push-5">  @Html.Action("Summary", "Cart") </div> <br />
+    </div>
+    <div class="row panel">
         <div id="categories" class="col-xs-3">            @Html.Action("Menu", "Navigation")        </div>
 
-                  @if (Request.IsAuthenticated)
-                  {
-                      <button type="button" class="btn btn-primary">@Html.ActionLink("Lägg till ny produkt", "Create")</button>
-                  }
+        @if (Request.IsAuthenticated)
+        {
+            <button type="button" class="btn btn-primary">@Html.ActionLink("Lägg till ny produkt", "Create")</button>
+        }
 
-                
-      
+
+
 
 
         <div class="col-xs-8">            @RenderBody()        </div>
     </div>
 
-
-
-
-
-
-
     @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/widgetspecific")
     @Scripts.Render("~/bundles/bootstrap")
     @RenderSection("scripts", required: false)
 </body>

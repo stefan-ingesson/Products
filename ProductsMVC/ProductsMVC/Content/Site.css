@@ -111,3 +111,93 @@ nav navbar-nav navbar-right
 {
     position: relative;
 }
+
+.culture
+{
+    float: left;
+    margin-right: 10px;
+}
+
+#cultureimage
+{
+    width: 100px;
+    height: 80px;
+}
+
+
+
+input[type="radio"]:checked {
+    display: none;
+}
+
+
+body > div.navbar.navbar-inverse > form > fieldset > div > div.cultureimage > div > label > img
+{
+    width: 90px;
+    height: 50px;
+}
+
+
+body > div.navbar.navbar-inverse > form > fieldset > div:nth-child(3) > div > label > img {
+    width: 90px;
+    height: 50px;
+}
+
+
+body > div.navbar.navbar-inverse > form > fieldset > div:nth-child(2) > div > label > img 
+{
+     width: 90px;
+    height: 50px;
+}
+
+
+body > div.navbar.navbar-inverse > form > fieldset > div:nth-child(2) > div > label
+{
+    
+}
+
+
+input[type=radio]{
+    display: none;  
+}
+
+
+/*Flaggor istället för radiobutton*/
+.cc-selector input{
+    margin:0;padding:0;
+    -webkit-appearance:none;
+       -moz-appearance:none;
+            appearance:none;
+}
+.sverige{background-image:url(http://birgitmummu.vikki.fi/Svenska/Animation/Flaggan/SvenskaFlaggan10.jpg);}
+.england{background-image:url(http://vignette2.wikia.nocookie.net/fakten-und-voruteile-uber-lander/images/6/6d/England.gif/revision/latest?cb=20140612104140&path-prefix=de);}
+
+.cc-selector input:active +.drinkcard-cc{opacity: .9;}
+.cc-selector input:checked +.drinkcard-cc{
+    -webkit-filter: none;
+       -moz-filter: none;
+            filter: none;
+}
+.drinkcard-cc{
+    cursor:pointer;
+    background-size:contain;
+    background-repeat:no-repeat;
+    display:inline-block;
+    width:100px;height:70px;
+    -webkit-transition: all 100ms ease-in;
+       -moz-transition: all 100ms ease-in;
+            transition: all 100ms ease-in;
+    -webkit-filter: brightness(1.8) grayscale(1) opacity(.7);
+       -moz-filter: brightness(1.8) grayscale(1) opacity(.7);
+            filter: brightness(1.8) grayscale(1) opacity(.7);
+}
+.drinkcard-cc:hover{
+    -webkit-filter: brightness(1.2) grayscale(.5) opacity(.9);
+       -moz-filter: brightness(1.2) grayscale(.5) opacity(.9);
+            filter: brightness(1.2) grayscale(.5) opacity(.9);
+}
+
+/* Extras */
+/*a:visited{color:#888}
+a{color:#444;text-decoration:none;}
+p{margin-bottom:.3em;}*/
