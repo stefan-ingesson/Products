@@ -32,9 +32,9 @@
       @using Microsoft.AspNet.Identity
         @if (Request.IsAuthenticated)
         {<p>
-             <button type="button" class="btn btn-primary">@Html.ActionLink("Details", "Details", new { id = p.ID }) </button>
-              <button type="button" class="btn btn-primary">   @Html.ActionLink("Edit", "Edit", new { id = p.ID }) </button>
-             <button type="button" class="btn btn-primary">  @Html.ActionLink("Delete", "Delete", new { id = p.ID }) </button>
+             <button type="button" class="btn btn-primary">@Html.ActionLink(Resources.Details, "Details", new { id = p.ID }) </button>
+              <button type="button" class="btn btn-primary">   @Html.ActionLink(Resources.Edit, "Edit", new { id = p.ID }) </button>
+             <button type="button" class="btn btn-primary">  @Html.ActionLink(Resources.Delete, "Delete", new { id = p.ID }) </button>
 </p>
         }
         else
@@ -57,4 +57,5 @@
     @Html.PageLinks(Model.PagingInfo, x => Url.Action("List", 
     new { page = x, category = Model.CurrentCategory })) 
 </div>
+
 

@@ -129,8 +129,17 @@
   <data name="ChooseYourLanguage" xml:space="preserve">
     <value>Välj språk</value>
   </data>
+  <data name="Create" xml:space="preserve">
+    <value>Lägg till ny produkt</value>
+  </data>
+  <data name="Delete" xml:space="preserve">
+    <value>Ta bort produkt</value>
+  </data>
   <data name="Details" xml:space="preserve">
     <value>Produktdetaljer</value>
+  </data>
+  <data name="Edit" xml:space="preserve">
+    <value>Redigera</value>
   </data>
   <data name="Name" xml:space="preserve">
     <value>Namn</value>
