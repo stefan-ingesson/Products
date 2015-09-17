@@ -12,6 +12,9 @@ using System.IO;
 using ProductsMVC.Helpers;
 using ProductsMVC.Services;
 using System.Threading.Tasks;
+using System.Web.Script.Serialization;
+using System.Globalization;
+using System.Text.RegularExpressions;
 
 namespace ProductsMVC.Controllers
 {
@@ -230,5 +233,20 @@ namespace ProductsMVC.Controllers
             }
             base.Dispose(disposing);
         }
+
+
+
+        public decimal Convert(decimal amount, string fromCurrency, string toCurrency)
+        {
+            WebClient web = new WebClient();
+            string url = string.Format("https://www.google.com/finance/converter?a", fromCurrency.ToUpper(), toCurrency.ToUpper(), amount);
+            string response = web.DownloadString(url);
+            Regex regex = new Regex("rhs: \\\"(\\d*.\\d*)");
+            decimal rate = System.Convert.ToDecimal(regex.Match(response).Groups[1].Value);
+            return rate;
+        }
+
+     
+       
     }
 }

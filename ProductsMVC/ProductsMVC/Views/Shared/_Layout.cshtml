@@ -9,6 +9,7 @@
     <title>@ViewBag.Title - My ASP.NET Application</title>
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
+  
 
 
 </head>
@@ -32,16 +33,17 @@
         {
             <button type="button" class="btn btn-primary">@Html.ActionLink(Resources.Create, "Create")</button>
         }
+    
+            @Html.Partial("_Currency")
 
 
-
-
-
-        <div class="col-xs-8">            @RenderBody()        </div>
-    </div>
+            <div class="col-xs-8">            @RenderBody()        </div>
+</div>
 
     @Scripts.Render("~/bundles/jquery")
+
     @Scripts.Render("~/widgetspecific")
+     @Scripts.Render("~Currency")
     @Scripts.Render("~/bundles/bootstrap")
     @RenderSection("scripts", required: false)
 </body>
