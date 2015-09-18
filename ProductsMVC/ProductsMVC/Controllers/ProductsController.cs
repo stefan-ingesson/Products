@@ -12,9 +12,8 @@ using System.IO;
 using ProductsMVC.Helpers;
 using ProductsMVC.Services;
 using System.Threading.Tasks;
-using System.Web.Script.Serialization;
-using System.Globalization;
 using System.Text.RegularExpressions;
+using System.Net.Http;
 
 namespace ProductsMVC.Controllers
 {
@@ -76,13 +75,13 @@ namespace ProductsMVC.Controllers
             return View(await service.GetProductsAsync());
         }
 
-        public async Task<ViewResult> RemoteId(int id)
+        public async Task<ActionResult> RemoteId(int id)
         {
             Task <Product> task = service.GetProductByIdAsync(id);
             return View(await service.GetProductByIdAsync(id));
         }
 
-
+    
 
         public ViewResult SinglePage()
         {

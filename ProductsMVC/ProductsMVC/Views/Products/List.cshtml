@@ -2,15 +2,61 @@
 
 @{    ViewBag.Title = "Products"; }
 
+<div id="searchfield">
+  
+        <p>
+            @using (Html.BeginForm("Index", "Products", FormMethod.Get))
+            {
+            <p style="margin-right: 75%;">
+                Sök på produkt: @Html.TextBox("searchProduct")
+                <input type="submit" value="Filtrera" style=" margin-left: 35%; margin-top: 3%;" />
+            </p>
+            }
+        
 
-<p>
-@using (Html.BeginForm("Index", "Products", FormMethod.Get))
-{ 
-<p style="margin-right: 75%;">
-    Sök på produkt: @Html.TextBox("searchProduct")
-    <input type="submit" value="Filtrera" style=" margin-left: 35%; margin-top: 3%;" />
-</p>
-}
+  
+@*Script för att söka på produkt ID*@
+<div>
+    <h2>Search by ID</h2>
+    <input type="text" id="prodId" size="5" />
+    <input type="button" value="Search" onclick="find();" />
+    <p id="product" />
+</div>
+
+
+<script src="http://ajax.aspnetcdn.com/ajax/jQuery/jquery-2.0.3.min.js"></script>
+<script>
+    var uri = 'api/products';
+
+    $(document).ready(function () {
+      // Send an AJAX request
+      $.getJSON(uri)
+          .done(function (data) {
+            // On success, 'data' contains a list of products.
+            $.each(data, function (key, item) {
+              // Add a list item for the product.
+              $('<li>', { text: formatItem(item) }).appendTo($('#products'));
+            });
+          });
+    });
+
+    function formatItem(item) {
+      return item.Name + ': $' + item.Price;
+    }
+
+    function find() {
+      var id = $('#prodId').val();
+      $.getJSON(uri + '/' + id)
+          .done(function (data) {
+            $('#product').text(formatItem(data));
+          })
+          .fail(function (jqXHR, textStatus, err) {
+            $('#product').text('Error: ' + err);
+          });
+    }
+</script>
+        </div>
+
 
 
 

@@ -25,6 +25,7 @@ namespace ProductsMVC.Services
 
         public async Task<Product> GetProductByIdAsync(int id)
         {
+          
             using (HttpClient httpClient = new HttpClient())
             {
                 return JsonConvert.DeserializeObject<Product>(
@@ -36,6 +37,15 @@ namespace ProductsMVC.Services
 
 
 
+
+       
+
+         
+        //using (HttpClient httpClient = new HttpClient())
+        //{
+        //    Task<String> response = httpClient.GetStringAsync(baseuri);
+        //    return JsonConvert.DeserializeObjectAsync<Car>(response.Result).Result;
+        //}
             
 
     }
