@@ -305,6 +305,10 @@
     <Content Include="Views\Products\SinglePage.cshtml" />
     <Content Include="Views\Products\Remote.cshtml" />
     <Content Include="Views\Shared\_Currency.cshtml" />
+    <Content Include="Views\Products\RemoteId.cshtml" />
+    <Content Include="Views\Shared\_TestApiView.cshtml" />
+    <Content Include="Views\Products\Summary.cshtml" />
+    <Content Include="Views\Products\Editor.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

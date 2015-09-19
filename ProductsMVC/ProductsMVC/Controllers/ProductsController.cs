@@ -71,8 +71,8 @@ namespace ProductsMVC.Controllers
         public async Task<ActionResult> Remote()
         {
             Task<List<Product>> task = service.GetProductsAsync();
-
             return View(await service.GetProductsAsync());
+        
         }
 
         public async Task<ActionResult> RemoteId(int id)
