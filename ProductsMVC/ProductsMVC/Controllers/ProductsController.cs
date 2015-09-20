@@ -72,12 +72,13 @@ namespace ProductsMVC.Controllers
         {
             Task<List<Product>> task = service.GetProductsAsync();
             return View(await service.GetProductsAsync());
+         
         
         }
 
         public async Task<ActionResult> RemoteId(int id)
         {
-            Task <Product> task = service.GetProductByIdAsync(id);
+            Task<Product> task = service.GetProductByIdAsync(id);
             return View(await service.GetProductByIdAsync(id));
         }
 

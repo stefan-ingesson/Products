@@ -5,24 +5,22 @@
 @{
     Layout = "/Views/Shared/_Layout.cshtml";
 }
-@*@section Scripts { }
-    @section Body {*@
-@*<div id="summary" class="section panel panel-primary">
-        @Html.Partial("Summary", Model)
-    </div>
-    <div id="editor" class="section panel panel-primary">
-        @Html.Partial("Editor", new Product())
-    </div> }*@
+
 
 
 @section Scripts {
     <script>
         var model = {
-            products: ko.observableArray()
+            products: ko.observableArray(),
+            editor: { name: ko.observable(""), location: ko.observable("") }
         };
-        function sendAjaxRequest(httpMethod, callback, url) {
+        function sendAjaxRequest(httpMethod, callback, url, reqData) {
             $.ajax("/api/products" + (url ? "/" + url : ""),
-               { type: httpMethod, success: callback });
+               {
+                   type: httpMethod,
+                   success: callback,
+                   data: reqData
+               });
         }
 
         function getAllItems() {
@@ -34,10 +32,32 @@
         }
 
         function removeItem(item) {
-            sendAjaxRequest("DELETE", function ()
-            { getAllItems(); },
-            item.ID);
-        }
+            sendAjaxRequest("DELETE", function () {
+                for (var i = 0; i < model.products().length; i++) {
+                    if (model.products()[i].ID == item.ID) {
+                        model.products.remove(model.products()[i]);
+                        break;
+                    }
+                }
+            },
+            item.ID);}
+
+
+            function handleEditorClick() {
+                sendAjaxRequest("POST", function (newItem)
+                { model.products.push(newItem); },
+                null,
+                {
+                    Name: model.editor.name,
+                    Price: model.editor.price,
+                    ArticleNumber: model.editor.articlenumber,
+                    Category: model.editor.category,
+                    Imageurl: model.editor.imageurl
+
+
+                });
+            }
+        
         $(document).ready(function () {
             getAllItems(); ko.applyBindings(model);
         });    </script> }
@@ -67,48 +87,79 @@
             </tbody>
         </table>
     </div>
-</div>    <div id="editor" class="section panel panel-primary">        @Html.Partial("Editor", new Product())    </div>
+</div>    <div id="editor" class="section panel panel-primary">
+
+    <div id="editor" class="section panel panel-primary">
+        <div class="panel-heading">
+            Add product
+        </div>
+        <div class="panel-body">
+            <div class="form-group">
+                <label>Name</label>
+                <input class="form-control" data-bind="value: model.editor.name" />
+            </div>
+            <div class="form-group">
+                <label>Price</label>
+                <input class="form-control" data-bind="value: model.editor.price" />
+            </div>
+            <div class="form-group">
+                <label>Article number</label>
+                <input class="form-control" data-bind="value: model.editor.articlenumber" />
+            </div>
+            <div class="form-group">
+                <label>Category</label>
+                <input class="form-control" data-bind="value: model.editor.category" />
+            </div>
+            <div class="form-group">
+                <label>Imageurl</label>
+                <input class="form-control" data-bind="value:  model.editor.imageurl" />
+            </div>           
+            <button class="btn btn-primary" data-bind="click: handleEditorClick">
+                Save
+            </button>
+        </div>
+    </div>
+</div>
 
 
 
 
 
 
+    @*<div id="id01"></div>
 
-@*<div id="id01"></div>
+        @section Scripts {
+            <script>
+                var xmlhttp = new XMLHttpRequest();
+                var url = "http://localhost:65184//API/Products/";
 
-    @section Scripts {
-        <script>
-            var xmlhttp = new XMLHttpRequest();
-            var url = "http://localhost:65184//API/Products/";
-
-            xmlhttp.onreadystatechange = function () {
-                if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
-                    myFunction(xmlhttp.responseText);
+                xmlhttp.onreadystatechange = function () {
+                    if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
+                        myFunction(xmlhttp.responseText);
+                    }
                 }
-            }
-            xmlhttp.open("GET", url, true);
-            xmlhttp.send();
+                xmlhttp.open("GET", url, true);
+                xmlhttp.send();
 
-            function myFunction(response) {
-                var arr = JSON.parse(response);
-                var i;
-                var out = "<table>";
+                function myFunction(response) {
+                    var arr = JSON.parse(response);
+                    var i;
+                    var out = "<table>";
 
-                for (i = 0; i < arr.length; i++) {
-                    out += "<tr><td>" +
-                    arr[i].Name +
-                    "</td><td>" +
-                    arr[i].Price +
-                    "</td><td>" +
-                    arr[i].ArticleNumber +
-                    "</td></tr>";
+                    for (i = 0; i < arr.length; i++) {
+                        out += "<tr><td>" +
+                        arr[i].Name +
+                        "</td><td>" +
+                        arr[i].Price +
+                        "</td><td>" +
+                        arr[i].ArticleNumber +
+                        "</td></tr>";
+                    }
+                    out += "</table>";
+                    document.getElementById("id01").innerHTML = out;
                 }
-                out += "</table>";
-                document.getElementById("id01").innerHTML = out;
-            }
-        </script>
-    }*@
+            </script>
+        }*@
 
 
 

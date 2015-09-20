@@ -79,6 +79,7 @@ namespace ProductsMVC.Controllers.API
         }
 
         // POST: api/Products
+        [HttpPost]
         [ResponseType(typeof(Product))]
         public IHttpActionResult PostProduct(Product product)
         {
