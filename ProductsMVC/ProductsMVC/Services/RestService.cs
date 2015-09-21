@@ -6,6 +6,7 @@ using System.Linq;
 using System.Net.Http;
 using System.Threading.Tasks;
 using System.Web;
+using System.Web.Http;
 
 namespace ProductsMVC.Services
 {
@@ -29,6 +30,19 @@ namespace ProductsMVC.Services
             {
                 return JsonConvert.DeserializeObject<Product>(
                     await httpClient.GetStringAsync(uri + id.ToString()));
+            }
+        }
+
+
+
+        [HttpPost]
+        [HttpDelete]
+        public async Task<Product> DeleteProduct(int id)
+        {
+           using (HttpClient httpClient = new HttpClient())
+            {
+                return JsonConvert.DeserializeObject<Product>(
+                      await httpClient.GetStringAsync(uri + id.ToString()));
             }
         }
 

@@ -14,15 +14,18 @@ using ProductsMVC.Services;
 using System.Threading.Tasks;
 using System.Text.RegularExpressions;
 using System.Net.Http;
+using Facebook;
 
 namespace ProductsMVC.Controllers
 {
+   [RequireHttps]
     public class ProductsController : BaseController
     {
 
         public int PageSize = 4;
 
         private ProductDb db = new ProductDb();
+
 
         public ViewResult List(string category, string searchString, int page = 1)
         {
@@ -236,15 +239,20 @@ namespace ProductsMVC.Controllers
 
 
 
-        public decimal Convert(decimal amount, string fromCurrency, string toCurrency)
-        {
-            WebClient web = new WebClient();
-            string url = string.Format("https://www.google.com/finance/converter?a", fromCurrency.ToUpper(), toCurrency.ToUpper(), amount);
-            string response = web.DownloadString(url);
-            Regex regex = new Regex("rhs: \\\"(\\d*.\\d*)");
-            decimal rate = System.Convert.ToDecimal(regex.Match(response).Groups[1].Value);
-            return rate;
-        }
+        //Facebook api implementation
+
+
+      
+
+        //public decimal Convert(decimal amount, string fromCurrency, string toCurrency)
+        //{
+        //    WebClient web = new WebClient();
+        //    string url = string.Format("https://www.google.com/finance/converter?a", fromCurrency.ToUpper(), toCurrency.ToUpper(), amount);
+        //    string response = web.DownloadString(url);
+        //    Regex regex = new Regex("rhs: \\\"(\\d*.\\d*)");
+        //    decimal rate = System.Convert.ToDecimal(regex.Match(response).Groups[1].Value);
+        //    return rate;
+        //}
 
      
        

@@ -22,6 +22,7 @@ namespace ProductsMVC.Controllers.API
             var result = db.Products
                      .Select(p => new ProductInfo
                      {
+                         ID = p.ID,
                          Name = p.Name,
                          Price = p.Price,
                          ArticleNumber = p.ArticleNumber
@@ -126,6 +127,7 @@ namespace ProductsMVC.Controllers.API
 
         public class ProductInfo
         {
+            public int ID;
             public string Name;
             public decimal Price;
             public long ArticleNumber;
