@@ -9,6 +9,17 @@
 
 
 @section Scripts {
+
+@*<script type="text/javascript">
+    $(document).on('click', '#btn-success', function(evt){
+    evt.preventDefault();
+
+    $('alert')('alert alert-success').text('Success!');
+    });
+</script>*@
+
+
+
     <script>
         var model = {
             products: ko.observableArray(),
@@ -32,6 +43,7 @@
         }
 
         function removeItem(item) {
+            toastr.info('Produkt borttagen');
             sendAjaxRequest("DELETE", function () {
                 for (var i = 0; i < model.products().length; i++) {
                     if (model.products()[i].ID == item.ID) {
@@ -43,7 +55,8 @@
             item.ID);}
 
 
-            function handleEditorClick() {
+        function handleEditorClick() {
+            toastr.success('Produkt tillagd');
                 sendAjaxRequest("POST", function (newItem)
                 { model.products.push(newItem); },
                 null,
@@ -52,10 +65,10 @@
                     Price: model.editor.price,
                     ArticleNumber: model.editor.articlenumber,
                     Category: model.editor.category,
-                    Imageurl: model.editor.imageurl
+                    Imageurl: model.editor.imageurl                  
+                }
 
-
-                });
+                );
             }
         
         $(document).ready(function () {
@@ -81,7 +94,7 @@
                     <td data-bind="text: Name"></td>
                     <td data-bind="text: Price"></td>
                     <td>
-                        <button class="btn btn-xs btn-primary" data-bind="click: removeItem">Remove</button>
+                        <button class="btn btn-primary" data-bind="click: removeItem">Remove</button>
                     </td>
                 </tr>
             </tbody>
@@ -114,7 +127,7 @@
                 <label>Imageurl</label>
                 <input class="form-control" data-bind="value:  model.editor.imageurl" />
             </div>           
-            <button class="btn btn-primary" data-bind="click: handleEditorClick">
+            <button class="btn btn-primary" id="btn-success" data-bind="click: handleEditorClick">
                 Save
             </button>
         </div>
@@ -122,44 +135,6 @@
 </div>
 
 
-
-
-
-
-    @*<div id="id01"></div>
-
-        @section Scripts {
-            <script>
-                var xmlhttp = new XMLHttpRequest();
-                var url = "http://localhost:65184//API/Products/";
-
-                xmlhttp.onreadystatechange = function () {
-                    if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
-                        myFunction(xmlhttp.responseText);
-                    }
-                }
-                xmlhttp.open("GET", url, true);
-                xmlhttp.send();
-
-                function myFunction(response) {
-                    var arr = JSON.parse(response);
-                    var i;
-                    var out = "<table>";
-
-                    for (i = 0; i < arr.length; i++) {
-                        out += "<tr><td>" +
-                        arr[i].Name +
-                        "</td><td>" +
-                        arr[i].Price +
-                        "</td><td>" +
-                        arr[i].ArticleNumber +
-                        "</td></tr>";
-                    }
-                    out += "</table>";
-                    document.getElementById("id01").innerHTML = out;
-                }
-            </script>
-        }*@
 
 
 

@@ -8,8 +8,12 @@
     <link href="~/Content/bootstrap-theme.css" rel="stylesheet" />
     <script src="~/Scripts/jquery-1.10.2.js"></script>
     <script src="~/Scripts/knockout-3.0.0.js"></script>
+    <script src="~/Scripts/modernizr-2.6.2.js"></script>
+    <script src="~/Scripts/toastr.min.js"></script>
     @RenderSection("Scripts", required: false)
     @Styles.Render("~/Content/css")
+
+
 </head>
 <body>
 
@@ -24,6 +28,8 @@
         </div> <br /> <br />
         <div id="categories" class="col-xs-push-5">  @Html.Action("Summary", "Cart") </div> <br />
     </div>
+    @Html.Partial("_FlashMessage")
+
     <div class="row panel">
         <div id="categories" class="col-xs-3">            @Html.Action("Menu", "Navigation")        </div>
 
@@ -50,7 +56,8 @@
     @*@Scripts.Render("~Facebook")*@
     @Scripts.Render("~/bundles/bootstrap")
     @Scripts.Render("~/bundles/modernizr")
-  
+    @Scripts.Render("~/bundles/toastr")
+
 
 </body>
 </html>

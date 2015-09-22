@@ -134,9 +134,10 @@ namespace ProductsMVC.Controllers
             {
                 db.Products.Add(product);
                 db.SaveChanges();
+                TempData["success"] = "Produkt tillagd";
                 return RedirectToAction("List");
-            }
 
+            }     
             return View(product);
         }
 
@@ -204,6 +205,7 @@ namespace ProductsMVC.Controllers
             Product product = db.Products.Find(id);
             db.Products.Remove(product);
             db.SaveChanges();
+            TempData["success"] = "Produkt borttagen";
             return RedirectToAction("List");
         }
 

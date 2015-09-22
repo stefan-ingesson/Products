@@ -12,7 +12,7 @@ using ProductsMVC.Models;
 
 namespace ProductsMVC.Controllers.API
 {
-    public class ProductsController : ApiController
+    public class ProductsController : ApiController 
     {
         private ProductDb db = new ProductDb();
 
@@ -91,7 +91,6 @@ namespace ProductsMVC.Controllers.API
 
             db.Products.Add(product);
             db.SaveChanges();
-
             return CreatedAtRoute("DefaultApi", new { id = product.ID }, product);
         }
 
