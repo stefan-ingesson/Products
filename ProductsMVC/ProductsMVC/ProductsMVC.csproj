@@ -238,6 +238,8 @@
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\Cart.cs" />
     <Compile Include="Models\CartIndexViewModel.cs" />
+    <Compile Include="Models\CrimeScene.cs" />
+    <Compile Include="Models\CrimeSceneREST.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Models\PagingInfo.cs" />
@@ -261,7 +263,7 @@
     <Content Include="Content\Site.css" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
-    <Content Include="Scripts\Currency.js" />
+    <Content Include="Scripts\CrimeScene.js" />
     <Content Include="Scripts\Facebook.js" />
     <Content Include="Scripts\jquery.unobtrusive-ajax.js" />
     <Content Include="Scripts\jquery.unobtrusive-ajax.min.js" />
@@ -334,12 +336,12 @@
     <Content Include="Views\Shared\_Cultural.cshtml" />
     <Content Include="Views\Products\SinglePage.cshtml" />
     <Content Include="Views\Products\Remote.cshtml" />
-    <Content Include="Views\Shared\_Currency.cshtml" />
     <Content Include="Views\Products\RemoteId.cshtml" />
     <Content Include="Views\Shared\_TestApiView.cshtml" />
     <Content Include="Views\Products\Summary.cshtml" />
     <Content Include="Views\Products\Editor.cshtml" />
     <Content Include="Views\Shared\_FlashMessage.cshtml" />
+    <Content Include="Views\Products\CrimeSceneIndex.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

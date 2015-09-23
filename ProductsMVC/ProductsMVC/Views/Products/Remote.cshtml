@@ -10,23 +10,20 @@
 
 @section Scripts {
 
-@*<script type="text/javascript">
-    $(document).on('click', '#btn-success', function(evt){
-    evt.preventDefault();
-
-    $('alert')('alert alert-success').text('Success!');
-    });
-</script>*@
-
-
 
     <script>
         var model = {
             products: ko.observableArray(),
-            editor: { name: ko.observable(""), location: ko.observable("") }
+            editor: {
+                name: ko.observable(""),
+                price: ko.observable(""),
+                articlenumber: ko.observable(""),
+                category: ko.observable(""),
+                imageurl: ko.observable("")
+            }
         };
         function sendAjaxRequest(httpMethod, callback, url, reqData) {
-            $.ajax("/api/products" + (url ? "/" + url : ""),
+            $.ajax("/api/products/" + (url ? "/" + url : ""),
                {
                    type: httpMethod,
                    success: callback,
@@ -34,6 +31,7 @@
                });
         }
 
+        //Lista alla produkter
         function getAllItems() {
             sendAjaxRequest("GET", function (data) {
                 model.products.removeAll();
@@ -42,6 +40,16 @@
             });
         }
 
+        //Lista detaljerad produkt för att editera
+        //self.detail = ko.observable();
+        //self.getProductDetail =  function (item) {
+        //    ajaxHelper(uri + item.ID, 'GET').done(function (data) {
+        //        self.detail(data);
+        //    });
+           
+        //}
+
+        //Ta bort produkt
         function removeItem(item) {
             toastr.info('Produkt borttagen');
             sendAjaxRequest("DELETE", function () {
@@ -54,7 +62,7 @@
             },
             item.ID);}
 
-
+        //Hantering av knapptryck när jag vill lägga till produkt
         function handleEditorClick() {
             toastr.success('Produkt tillagd');
                 sendAjaxRequest("POST", function (newItem)
@@ -93,13 +101,26 @@
                     <td data-bind="text: ArticleNumber"></td>
                     <td data-bind="text: Name"></td>
                     <td data-bind="text: Price"></td>
+                    @*<td data-bind="text: Category"></td>*@
+                    @*<td data-bind="text: Imageurl"></td>*@
+                   
                     <td>
                         <button class="btn btn-primary" data-bind="click: removeItem">Remove</button>
                     </td>
+                    
                 </tr>
             </tbody>
         </table>
     </div>
+
+
+
+
+
+
+
+
+@*Lägga till ny produkt*@
 </div>    <div id="editor" class="section panel panel-primary">
 
     <div id="editor" class="section panel panel-primary">

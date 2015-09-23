@@ -1,0 +1,44 @@
+﻿@model IEnumerable<ProductsMVC.Models.CrimeScene>
+
+@{
+    ViewBag.Title = "AKTA DIG HÄR ÄR DET FARLIGT";
+}
+
+<h2>AKTA DIG HÄR ÄR DET FARLIGT</h2>
+
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Description)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Accuracy)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Place)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Text)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(model => item.Description)
+        </td>
+        <td>
+            @Html.DisplayFor(model => item.Accuracy)
+        </td>
+        <td>
+            @Html.DisplayFor(model => item.Place)
+        </td>
+        <td>
+            @Html.DisplayFor(model => item.Text)
+        </td>
+       
+    </tr>
+}
+
+</table>

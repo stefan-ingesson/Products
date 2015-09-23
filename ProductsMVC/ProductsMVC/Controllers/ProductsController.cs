@@ -240,21 +240,15 @@ namespace ProductsMVC.Controllers
         }
 
 
-
-        //Facebook api implementation
+        private CrimeSceneREST crime = new CrimeSceneREST();
+        public ActionResult CrimeScene()
+        {          
+            return View("CrimeSceneIndex", crime.GetCrimeScenes());
+        }
 
 
       
 
-        //public decimal Convert(decimal amount, string fromCurrency, string toCurrency)
-        //{
-        //    WebClient web = new WebClient();
-        //    string url = string.Format("https://www.google.com/finance/converter?a", fromCurrency.ToUpper(), toCurrency.ToUpper(), amount);
-        //    string response = web.DownloadString(url);
-        //    Regex regex = new Regex("rhs: \\\"(\\d*.\\d*)");
-        //    decimal rate = System.Convert.ToDecimal(regex.Match(response).Groups[1].Value);
-        //    return rate;
-        //}
 
      
        
