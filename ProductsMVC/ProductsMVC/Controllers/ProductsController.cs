@@ -15,6 +15,7 @@ using System.Threading.Tasks;
 using System.Text.RegularExpressions;
 using System.Net.Http;
 using Facebook;
+using System.Configuration;
 
 namespace ProductsMVC.Controllers
 {
@@ -247,6 +248,16 @@ namespace ProductsMVC.Controllers
         }
 
 
+       //Facebook
+
+
+   
+
+                  
+      
+
+            
+        
       
 
 

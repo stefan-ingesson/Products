@@ -29,6 +29,7 @@ textarea {
 .well {
     min-height: 15px;
     padding: 20px;
+    /*width: 80%;*/
     margin-bottom: 15px;
     background-color: #f5f5f5;
     border: 1px solid #e3e3e3;
@@ -196,6 +197,9 @@ input[type=radio]{
        -moz-filter: brightness(1.2) grayscale(.5) opacity(.9);
             filter: brightness(1.2) grayscale(.5) opacity(.9);
 }
+
+
+
 
 /* Extras */
 /*a:visited{color:#888}

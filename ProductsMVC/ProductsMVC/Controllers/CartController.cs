@@ -11,17 +11,17 @@ namespace ProductsMVC.Controllers
     {
         private ProductDb db = new ProductDb();
 
-        public ViewResult Index(Cart cart, string returnUrl) 
-        { 
-         return View(new CartIndexViewModel { ReturnUrl = returnUrl, Cart = cart });         
+        public ViewResult Index(Cart cart, string returnUrl)
+        {
+            return View(new CartIndexViewModel { ReturnUrl = returnUrl, Cart = cart });
         }
 
 
-        public RedirectToRouteResult AddToCart(Cart cart,int productId, string returnUrl)
+        public RedirectToRouteResult AddToCart(Cart cart, int productId, string returnUrl)
         {
             Product product = db.Products
             .FirstOrDefault(p => p.ID == productId);
-            if (product != null) 
+            if (product != null)
             {
                 cart.AddItem(product, 1);
             }
@@ -50,7 +50,38 @@ namespace ProductsMVC.Controllers
             return cart;
         }
 
-        public PartialViewResult Summary(Cart cart) 
+        public PartialViewResult Summary(Cart cart)
         { return PartialView(cart); }
+
+
+        //Klarna
+
+        public ViewResult Checkout(Cart cart)
+      {
+        var cartItems = cart.Lines.Select(item => new List<Dictionary<string, object>>()
+
+        {
+          new Dictionary<string, object>
+          {
+            {"reference", item.Product.ArticleNumber.ToString()},
+            {"name", item.Product.Name},
+            {"quantity", item.Quantity},
+            {"unit_price", (int)item.Product.Price * 100},
+            {"tax_rate", 2500}
+          }
+
+        });
+        var klarnacart = new Dictionary<string, object> { { "items", cartItems } };
+
+        var data = new Dictionary<string, object>
+        {
+          {"cart", klarnacart}
+        };
+
+        return View("CartPartialIndex");
+      }
     }
 }
+
+
+

@@ -10,8 +10,7 @@
 
 @section Scripts {
 
-
-    <script>
+        <script>
         var model = {
             products: ko.observableArray(),
             editor: {
@@ -23,6 +22,7 @@
             }
         };
         function sendAjaxRequest(httpMethod, callback, url, reqData) {
+            self.editing = ko.observable(false);
             $.ajax("/api/products/" + (url ? "/" + url : ""),
                {
                    type: httpMethod,
