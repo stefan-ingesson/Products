@@ -54,15 +54,7 @@ namespace ProductsMVC
             //   consumerKey: "",
             //   consumerSecret: "");
 
-            app.UseFacebookAuthentication(
-               appId: "1608150636114723",
-               appSecret: "9fe6aff7e91b4328fca781777c950840");
-
-            app.UseGoogleAuthentication(new GoogleOAuth2AuthenticationOptions()
-            {
-                ClientId = "376882225510-ce5gjmij69eknq3als4gpmo4kglamn1r.apps.googleusercontent.com",
-                ClientSecret = "oJAjueSNnFPkJ-5AEMgCT-4x"
-            });
+       );
         }
     }
 }
