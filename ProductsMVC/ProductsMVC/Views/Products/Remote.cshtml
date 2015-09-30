@@ -10,7 +10,29 @@
 
 @section Scripts {
 
+
+
+
+
         <script>
+
+            function ajaxHelper(uri, method, data) {
+
+           
+                return $.ajax({
+                    type: method,
+                    url: uri,
+                    dataType: 'json',
+                    contentType: 'application/json',
+                    data: data ? JSON.stringify(data) : null
+                });
+                
+               
+            }
+
+
+
+
         var model = {
             products: ko.observableArray(),
             editor: {
@@ -21,6 +43,22 @@
                 imageurl: ko.observable("")
             }
         };
+
+
+        function products(data) {
+            var self = this;
+            data = data || {};
+            // Data from model
+            //self.ID = data.ID;
+            self.Name = ko.observable(data.Name);
+            self.Price = ko.observable(data.Price);
+            self.ArticleNumber = ko.observable(data.ArticleNumber);
+            self.Category = ko.observable(data.Category);
+            self.ImageUrl = ko.observable(data.ImageUrl);
+            self.editing = ko.observable(false);
+        };
+
+
         function sendAjaxRequest(httpMethod, callback, url, reqData) {
             self.editing = ko.observable(false);
             $.ajax("/api/products/" + (url ? "/" + url : ""),
@@ -33,6 +71,7 @@
 
         //Lista alla produkter
         function getAllItems() {
+            self.editing = ko.observable(false);
             sendAjaxRequest("GET", function (data) {
                 model.products.removeAll();
                 for (var i = 0; i < data.length; i++)
@@ -40,14 +79,16 @@
             });
         }
 
-        //Lista detaljerad produkt för att editera
-        //self.detail = ko.observable();
-        //self.getProductDetail =  function (item) {
-        //    ajaxHelper(uri + item.ID, 'GET').done(function (data) {
-        //        self.detail(data);
-        //    });
+            //Lista detaljerad produkt för att editera
+        var uri = '/api/products/';
+        self.detail = ko.observable();
+        self.getProduct = function (item) {
+            ajaxHelper(uri + item.ID, 'GET').done(function (data) {
+                self.detail(data);
+            });
+          
            
-        //}
+        }
 
         //Ta bort produkt
         function removeItem(item) {
@@ -77,8 +118,9 @@
                 }
 
                 );
-            }
-        
+        }
+
+       
         $(document).ready(function () {
             getAllItems(); ko.applyBindings(model);
         });    </script> }
@@ -98,13 +140,15 @@
             </thead>
             <tbody data-bind="foreach: model.products">
                 <tr>
+
                     <td data-bind="text: ArticleNumber"></td>
                     <td data-bind="text: Name"></td>
                     <td data-bind="text: Price"></td>
                     @*<td data-bind="text: Category"></td>*@
                     @*<td data-bind="text: Imageurl"></td>*@
-                   
+                  
                     <td>
+                      <a href="#" data-bind="click: getProduct">Details</a>
                         <button class="btn btn-primary" data-bind="click: removeItem">Remove</button>
                     </td>
                     
@@ -114,7 +158,23 @@
     </div>
 
 
-
+    <!-- ko if:detail() -->
+    <div class="col-md-4">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <h2 class="panel-title">Detail</h2>
+            </div>
+            <table class="table">
+                <tr> <td data-bind="text: ArticleNumber"></td></tr>
+                <tr><td data-bind="text: Name"></td></tr>
+               <tr> <td data-bind="text: Price"></td></tr>
+                @*<td data-bind="text: Category"></td>*@
+                @*<td data-bind="text: Imageurl"></td>*@
+        
+            </table>
+        </div>
+    </div>
+    <!-- /ko -->
 
 
 

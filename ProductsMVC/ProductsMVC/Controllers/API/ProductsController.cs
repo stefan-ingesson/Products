@@ -36,10 +36,12 @@ namespace ProductsMVC.Controllers.API
         public IHttpActionResult GetProduct(int id)
         {
             Product product = db.Products.Find(id);
+
             if (product == null)
             {
                 return NotFound();
             }
+
 
             return Ok(product);
         }
