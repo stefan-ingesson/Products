@@ -42,13 +42,13 @@ namespace ProductsMVC.Models
         //}
      
     }
-    public class ProductDb : DbContext
-        {
-            public DbSet<Product> Products { get; set; }
+    //public class ProductDb : DbContext
+    //    {
+    //        public DbSet<Product> Products { get; set; }
 
-            public System.Data.Entity.DbSet<ProductsMVC.Models.CrimeScene> CrimeScenes { get; set; }
-            //public DbSet<Category> Categories { get; set; }
-        }
+    //        public System.Data.Entity.DbSet<ProductsMVC.Models.CrimeScene> CrimeScenes { get; set; }
+    //        //public DbSet<Category> Categories { get; set; }
+    //    }
 
     
 }

@@ -16,16 +16,18 @@ using System.Text.RegularExpressions;
 using System.Net.Http;
 using Facebook;
 using System.Configuration;
+using ProductsMVC.Models.Repositories;
 
 namespace ProductsMVC.Controllers
 {
-   [RequireHttps]
+    [RequireHttps]
     public class ProductsController : BaseController
     {
 
         public int PageSize = 4;
 
-        private ProductDb db = new ProductDb();
+        //private ProductDb db = new ProductDb();
+        ProductRepository repository = new ProductRepository();
 
 
         public ViewResult List(string category, string searchString, int page = 1)
@@ -33,7 +35,7 @@ namespace ProductsMVC.Controllers
 
             ProductsListViewModel model = new ProductsListViewModel
             {
-                Products = db.Products
+                Products = repository.GetAll()
                .Where(p => category == null || p.Category == category || searchString == p.Name)
                .OrderBy(p => p.ID)
                .Skip((page - 1) * PageSize)
@@ -43,7 +45,7 @@ namespace ProductsMVC.Controllers
                 {
                     CurrentPage = page,
                     ItemsPerPage = PageSize,
-                    TotalItems = db.Products.Count()
+                    TotalItems = repository.GetAll().Count
 
 
                 },
@@ -57,17 +59,17 @@ namespace ProductsMVC.Controllers
 
         // GET: Products
 
-        public ActionResult Index(string searchProduct)
-        {
-            var products = from p in db.Products
-                           select p;
+        //public ActionResult Index(string searchProduct)
+        //{
+        //    var products = from p in db.Products
+        //                   select p;
 
-            if (!String.IsNullOrEmpty(searchProduct))
-            {
-                products = products.Where(p => p.Name.Contains(searchProduct));
-            }
-            return View(products);
-        }
+        //    if (!String.IsNullOrEmpty(searchProduct))
+        //    {
+        //        products = products.Where(p => p.Name.Contains(searchProduct));
+        //    }
+        //    return View(products);
+        //}
 
         //Using remote web api
         private RestService service = new RestService();
@@ -76,8 +78,8 @@ namespace ProductsMVC.Controllers
         {
             Task<List<Product>> task = service.GetProductsAsync();
             return View(await service.GetProductsAsync());
-         
-        
+
+
         }
 
         public async Task<ActionResult> RemoteId(int id)
@@ -86,7 +88,7 @@ namespace ProductsMVC.Controllers
             return View(await service.GetProductByIdAsync(id));
         }
 
-    
+
 
         public ViewResult SinglePage()
         {
@@ -94,10 +96,11 @@ namespace ProductsMVC.Controllers
         }
 
 
-        //public ActionResult Index()
-        //{
-        //    return View(db.Products.ToList());
-        //}
+        public ActionResult Index()
+        {
+            //return View(db.Products.ToList());
+            return View(repository.GetAll());
+        }
 
         // GET: Products/Details/5
         public ActionResult Details(int? id)
@@ -106,7 +109,11 @@ namespace ProductsMVC.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Product product = db.Products.Find(id);
+
+            //Product product = db.Products.Find(id);
+            Product product = repository.GetId(id);
+       
+
             if (product == null)
             {
                 return HttpNotFound();
@@ -115,7 +122,7 @@ namespace ProductsMVC.Controllers
         }
 
         // GET: Products/Create
-       [Authorize(Users = "stefan.ingesson@gmail.com")]
+        [Authorize(Users = "stefan.ingesson@gmail.com")]
         public ActionResult Create()
         {
             return View();
@@ -133,12 +140,15 @@ namespace ProductsMVC.Controllers
 
             if (ModelState.IsValid)
             {
-                db.Products.Add(product);
-                db.SaveChanges();
+                //db.Products.Add(product);
+                //db.SaveChanges();
+
+                repository.Add(product);
+                repository.SaveChanges();
                 TempData["success"] = "Produkt tillagd";
                 return RedirectToAction("List");
 
-            }     
+            }
             return View(product);
         }
 
@@ -154,7 +164,7 @@ namespace ProductsMVC.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Product product = db.Products.Find(id);
+            Product product = repository.GetId(id);
             if (product == null)
             {
                 return HttpNotFound();
@@ -173,8 +183,9 @@ namespace ProductsMVC.Controllers
         {
             if (ModelState.IsValid)
             {
-                db.Entry(product).State = EntityState.Modified;
-                db.SaveChanges();
+                //db.Entry(product).State = EntityState.Modified;
+                repository.Edit(product);
+                repository.SaveChanges();
                 return RedirectToAction("List");
             }
             return View(product);
@@ -189,7 +200,8 @@ namespace ProductsMVC.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Product product = db.Products.Find(id);
+            //Product product = db.Products.Find(id);
+            Product product = repository.GetId(id);
             if (product == null)
             {
                 return HttpNotFound();
@@ -198,60 +210,62 @@ namespace ProductsMVC.Controllers
         }
 
         // POST: Products/Delete/5
-         [Authorize(Users = "stefan.ingesson@gmail.com")]
-        [HttpPost, ActionName("Delete")]  
+        [Authorize(Users = "stefan.ingesson@gmail.com")]
+        [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            Product product = db.Products.Find(id);
-            db.Products.Remove(product);
-            db.SaveChanges();
+            Product product = repository.GetId(id);
+
+            repository.Delete(product);
+            repository.SaveChanges();
             TempData["success"] = "Produkt borttagen";
             return RedirectToAction("List");
         }
 
 
-         public ActionResult SetCulture(string culture)
-         {
-             // Validate input
-             culture = CultureHelper.GetImplementedCulture(culture);
-             // Save culture in a cookie
-             HttpCookie cookie = Request.Cookies["_culture"];
-             if (cookie != null)
-                 cookie.Value = culture;   // update cookie value
-             else
-             {
-                 cookie = new HttpCookie("_culture");
-                 cookie.Value = culture;
-                 cookie.Expires = DateTime.Now.AddYears(1);
-             }
-             Response.Cookies.Add(cookie);
-             return RedirectToAction("List");
-         }                
-
-
-
-        protected override void Dispose(bool disposing)
+        public ActionResult SetCulture(string culture)
         {
-            if (disposing)
+            // Validate input
+            culture = CultureHelper.GetImplementedCulture(culture);
+            // Save culture in a cookie
+            HttpCookie cookie = Request.Cookies["_culture"];
+            if (cookie != null)
+                cookie.Value = culture;   // update cookie value
+            else
             {
-                db.Dispose();
+                cookie = new HttpCookie("_culture");
+                cookie.Value = culture;
+                cookie.Expires = DateTime.Now.AddYears(1);
             }
-            base.Dispose(disposing);
+            Response.Cookies.Add(cookie);
+            return RedirectToAction("List");
         }
+
+
+
+        //protected override void Dispose(bool disposing)
+        //{
+        //    if (disposing)
+        //    {
+        //        db.Dispose();
+        //    }
+        //    base.Dispose(disposing)
+        //}
 
 
         private CrimeSceneREST crime = new CrimeSceneREST();
         public ActionResult CrimeScene()
-        {          
+        {
             return View("CrimeSceneIndex", crime.GetCrimeScenes());
         }
 
 
-       //Facebook
+        //       //Facebook
 
 
-   
+    }
+}
 
                   
       
@@ -263,5 +277,5 @@ namespace ProductsMVC.Controllers
 
      
        
-    }
-}
+//    }
+//}
